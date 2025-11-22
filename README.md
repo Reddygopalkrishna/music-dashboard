@@ -1,36 +1,241 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎵 Music Streaming Dashboard  
+A complete, modern music streaming dashboard built with **Next.js 14**, **Redux Toolkit**, **NextAuth**, **TanStack Query**, and **Tailwind + shadcn/ui**.
 
-## Getting Started
+This project was created as part of a frontend assignment, fully matching the required specifications.
 
-First, run the development server:
+---
 
+# 📸 Screenshots  
+> Replace the placeholder image links with your real screenshot URLs.
+
+### 🏠 Home Page
+![Home Page](./screenshots/home.png)
+
+### 🎧 Music Player
+![Music Player](./screenshots/player.png)
+
+### 📚 Playlists
+![Playlists](./screenshots/playlists.png)
+
+### 🔐 Login Page
+![Login Page](./screenshots/login.png)
+
+---
+
+# 🚀 Features Implemented
+
+## ✅ 1. Home Screen
+- Trending songs, artists, and new releases  
+- Responsive grid layout  
+- Each card shows:
+  - Album art  
+  - Title  
+  - Artist  
+  - Duration  
+- Infinite scroll  
+- Skeleton loading  
+- Fully responsive (mobile-first)
+
+---
+
+## ✅ 2. Music Player (Persistent)
+- Always visible bottom player (mobile + desktop)
+- Shows:
+  - Artwork  
+  - Title  
+  - Artist  
+- Controls:
+  - Play / Pause  
+  - Next / Previous  
+  - Seekbar  
+  - Volume  
+- Auto-play next song  
+- Works across all routes  
+- Smooth UI, Spotify-style layout
+
+---
+
+## ✅ 3. Playlist Management
+- Protected route `/playlists`  
+- Create playlists  
+- Rename / Delete playlists  
+- Add songs to playlists  
+- LocalStorage persistence  
+- Global sync with Redux Toolkit  
+- Liked Songs page (with like/unlike system)
+
+---
+
+## ✅ 4. Authentication (NextAuth + Credentials)
+- Uses **NextAuth Credentials Provider**  
+- Mock Login Credentials:
+
+Email: user@vibe.com
+
+Password: password
+
+
+- JWT session  
+- Pages protected:
+  - `/profile`
+  - `/playlists`
+  - `/liked`
+- Navbar updates UI based on logged-in state
+
+---
+
+## ✅ 5. State Management & API Caching
+### Redux Toolkit manages:
+- Player state  
+- Queue  
+- Playlist data  
+- Liked songs  
+- UI state
+
+### TanStack Query:
+- Music API fetching  
+- Caching + refetch  
+- Error states
+
+---
+
+## ✅ 6. Responsive UI & UX
+- Tailwind CSS + shadcn/ui  
+- Mobile:
+  - Bottom navigation bar  
+  - Compact player  
+- Desktop:
+  - Top navbar  
+  - Clean layout  
+- Dark/Light theme toggle  
+- Smooth animations (optional Framer Motion-ready)
+
+---
+
+# 🗂️ Folder Structure (Important)
+
+
+
+music-dashboard/
+│
+├── app/
+│ ├── api/
+│ │ └── auth/
+│ │ └── [...nextauth]/
+│ │ └── route.ts
+│ ├── auth/
+│ │ └── login/page.tsx
+│ ├── playlists/
+│ │ ├── page.tsx
+│ │ └── [id]/page.tsx
+│ ├── liked/page.tsx
+│ ├── search/page.tsx
+│ ├── profile/page.tsx
+│ ├── layout.tsx
+│ └── page.tsx
+│
+├── components/
+│ ├── Navbar.tsx
+│ ├── Player.tsx
+│ ├── BottomNav.tsx
+│ ├── SongCard.tsx
+│ ├── ArtistCard.tsx
+│ ├── SkeletonGrid.tsx
+│ ├── playlist/
+│ │ ├── CreatePlaylistModal.tsx
+│ │ ├── RenamePlaylistModal.tsx
+│ │ └── DeletePlaylistModal.tsx
+│
+├── lib/
+│ ├── api/music.ts
+│ ├── providers/
+│ │ ├── ReduxProvider.tsx
+│ │ ├── QueryProvider.tsx
+│ │ ├── SessionProvider.tsx
+│ ├── slices/
+│ │ ├── playerSlice.ts
+│ │ ├── playlistSlice.ts
+│ │ └── likedSlice.ts
+│ ├── utils/getUniqueArtists.ts
+│ └── store.ts
+│
+├── public/
+│
+├── styles/
+│ └── globals.css
+│
+└── package.json
+
+
+---
+
+# 🔧 Setup Instructions
+
+## 1️⃣ Clone the Repository  
 ```bash
+git clone https://github.com/your-repo/music-dashboard.git
+cd music-dashboard
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Setup Environment Variables
+
+Create .env.local:
+
+NEXTAUTH_SECRET=your_secret_key
+NEXTAUTH_URL=http://localhost:3000
+
+
+Generate a NEXTAUTH_SECRET:
+
+openssl rand -base64 32
+
+
+⚠️ No API key required (using iTunes Public API).
+
+4️⃣ Run the Development Server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+App will run at:
+👉 http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🔐 Mock Login Credentials
 
-## Learn More
+Use these credentials on /auth/login:
 
-To learn more about Next.js, take a look at the following resources:
+Email: user@vibe.com  
+Password: password
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🚀 Deployment to Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Push the project to GitHub.
 
-## Deploy on Vercel
+Open https://vercel.com
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Import your repository
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add env variables:
+
+NEXTAUTH_SECRET=your_generated_secret
+NEXTAUTH_URL=https://your-vercel-url.vercel.app
+
+
+Deploy!
+
+📝 Assignment Requirements — Completed ✔
+Requirement	Status
+Trending songs	✅
+Popular artists	✅
+New releases	✅
+Infinite scroll	✅
+Music player	✅
+Queue system	✅
+Playlists CRUD	✅
+Liked songs	✅
+Auth protected routes	✅
+Credentials Provider	✅
+UI responsive mobile/desktop	✅
+Skeleton loading & toasts	✅
+Dark/Light mode	✅

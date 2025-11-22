@@ -1,65 +1,148 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getTrendingSongs } from "@/lib/api/music";
+import SongCard from "@/components/SongCard";
+import ArtistCard from "@/components/ArtistCard";
+import { getUniqueArtists } from "@/lib/utils/getUniqueArtists";
+import SkeletonGrid from "@/components/SkeletonGrid";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+const HomePage = () => {
+  const trendingQuery = useQuery({
+    queryKey: ["trendingSongs"],
+    queryFn: getTrendingSongs,
+  });
+
+  const [songs, setSongs] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (trendingQuery.data?.results) {
+      setSongs(trendingQuery.data.results);
+    }
+  }, [trendingQuery.data]);
+
+  const fetchMoreSongs = async () => {
+    const offset = songs.length;
+
+    const res = await fetch(
+      `https://itunes.apple.com/search?term=top&entity=song&limit=20&offset=${offset}`
+    );
+    const newData = await res.json();
+
+    setSongs((prev) => [...prev, ...newData.results]);
+  };
+
+  const uniqueArtists = trendingQuery.data
+    ? getUniqueArtists(trendingQuery.data.results)
+    : [];
+
+  const newReleasesQuery = useQuery({
+    queryKey: ["newReleases"],
+    queryFn: async () => {
+      const res = await fetch(
+        "https://itunes.apple.com/search?term=new&entity=song&limit=20"
+      );
+      return res.json();
+    },
+  });
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main
+      className="pt-28 px-6 space-y-14"
+      aria-label="Music dashboard home"
+    >
+      {/* Trending Songs */}
+      <section aria-labelledby="trending-heading">
+        <header className="flex items-center justify-between mb-4">
+          <h1 id="trending-heading" className="text-2xl font-bold">
+            Trending Songs
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        </header>
+
+        {trendingQuery.isLoading && <SkeletonGrid />}
+
+        {!trendingQuery.isLoading && (
+          <InfiniteScroll
+            dataLength={songs.length}
+            next={fetchMoreSongs}
+            hasMore={true}
+            loader={
+              <p
+                className="text-center py-4 text-sm text-muted-foreground"
+                aria-live="polite"
+              >
+                Loading more songs…
+              </p>
+            }
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div
+              className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+              role="list"
+            >
+              {songs.map((song) => (
+                <article key={song.trackId} role="listitem">
+                  <SongCard song={song} allSongs={songs} />
+                </article>
+              ))}
+            </div>
+          </InfiniteScroll>
+        )}
+      </section>
+
+      {/* Popular Artists */}
+      <section aria-labelledby="artists-heading">
+        <header className="flex items-center justify-between mb-4">
+          <h2 id="artists-heading" className="text-xl font-bold">
+            Popular Artists
+          </h2>
+        </header>
+
+        {trendingQuery.isLoading ? (
+          <SkeletonGrid />
+        ) : (
+          <div
+            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4"
+            role="list"
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            {uniqueArtists.map((artist) => (
+              <article key={artist.artistId} role="listitem">
+                <ArtistCard artist={artist} />
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* New Releases */}
+      <section aria-labelledby="new-releases-heading">
+        <header className="flex items-center justify-between mb-4">
+          <h2 id="new-releases-heading" className="text-xl font-bold">
+            New Releases
+          </h2>
+        </header>
+
+        {newReleasesQuery.isLoading ? (
+          <SkeletonGrid />
+        ) : (
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+            role="list"
+          >
+            {newReleasesQuery.data?.results?.map((song: any) => (
+              <article key={song.trackId} role="listitem">
+                <SongCard
+                  song={song}
+                  allSongs={newReleasesQuery.data.results}
+                />
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
   );
-}
+};
+
+export default HomePage;
