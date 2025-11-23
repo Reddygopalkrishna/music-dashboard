@@ -22,33 +22,44 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { MoreVertical } from "lucide-react";
+import type { Playlist } from "@/lib/types/playlist";
 
 const PlaylistsPage = () => {
   const dispatch = useDispatch();
 
-  // 👉 MODAL STATES (PUT THEM AT THE TOP)
+  // MODAL STATES (PUT THEM AT THE TOP)
   const [showModal, setShowModal] = useState(false);
-  const [renameTarget, setRenameTarget] = useState(null);
-  const [deleteTarget, setDeleteTarget] = useState(null);
 
-  // 👉 PLAYLIST STATE
+const [renameTarget, setRenameTarget] = useState<Playlist | null>(null);
+const [deleteTarget, setDeleteTarget] = useState<Playlist | null>(null);
+
+
+  // PLAYLIST STATE
   const playlists = useSelector(
     (state: RootState) => state.playlists.playlists
   );
 
-  // 👉 HANDLERS (PUT THESE **INSIDE** THE COMPONENT, AFTER STATES)
-  const handleRename = (newName: string) => {
-    dispatch(
-      renamePlaylist({
-        id: renameTarget.id,
-        name: newName,
-      })
-    );
-    setRenameTarget(null);
-  };
+  //  HANDLERS (PUT THESE **INSIDE** THE COMPONENT, AFTER STATES)
+const handleRename = (newName: string) => {
+  if (!renameTarget) return;
+
+  dispatch(
+    renamePlaylist({
+     id: renameTarget.id,
+      name: newName,
+    })
+  );
+
+  setRenameTarget(null);
+};
+
+
 
   const handleDelete = () => {
-    dispatch(deletePlaylist(deleteTarget.id));
+    if (deleteTarget) {
+      dispatch(deletePlaylist(deleteTarget.id));
+    }
+
     setDeleteTarget(null);
   };
 

@@ -1,23 +1,30 @@
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 
-const DeletePlaylistModal = ({ playlist, onCancel, onDelete }) => {
-  return (
-    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-neutral-900 p-6 rounded-xl w-80 space-y-4">
-        <h2 className="text-lg font-bold">Delete Playlist?</h2>
-        <p className="text-sm opacity-70">
-          Are you sure you want to delete "{playlist.name}"?
-        </p>
+interface DeletePlaylistModalProps {
+  playlist: {
+    id: string;
+    name: string;
+  } | null;
+  onCancel: () => void;
+  onDelete: () => void;
+}
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={onCancel}>
-            Cancel
-          </Button>
-          <Button variant="destructive" onClick={onDelete}>
-            Delete
-          </Button>
+const DeletePlaylistModal = ({ playlist, onCancel, onDelete }: DeletePlaylistModalProps) => {
+  if (!playlist) return null;
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+      <div className="bg-white p-6 rounded-md shadow-lg max-w-sm w-full">
+        <h2 className="text-lg font-semibold mb-4">
+          Delete "{playlist.name}"?
+        </h2>
+
+        <div className="flex justify-end gap-3">
+          <Button variant="outline" onClick={onCancel}>Cancel</Button>
+          <Button variant="destructive" onClick={onDelete}>Delete</Button>
         </div>
       </div>
     </div>
