@@ -9,13 +9,15 @@ This project was created as part of a frontend assignment, fully matching the re
 > Replace the placeholder image links with your real screenshot URLs.
 
 ### 🏠 Home Page
-![Home Page](./screenshots/home.png)
+![Home Page](<img width="1906" height="862" alt="image" src="https://github.com/user-attachments/assets/c2632aed-3ece-4e08-9e16-b49efa682734" />
+)
 
 ### 🎧 Music Player
-![Music Player](./screenshots/player.png)
+![Music Player]()
 
 ### 📚 Playlists
-![Playlists](./screenshots/playlists.png)
+![Playlists](<img width="1002" height="520" alt="image" src="https://github.com/user-attachments/assets/107c0816-aac1-40ee-becc-fbe3e58b0951" />
+)
 
 ### 🔐 Login Page
 ![Login Page](./screenshots/login.png)
