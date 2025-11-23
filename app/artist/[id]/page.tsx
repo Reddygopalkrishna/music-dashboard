@@ -38,11 +38,13 @@ const ArtistPage = () => {
 <div className="flex items-center gap-6">
   {(() => {
     const directImage = songsQuery.data.results.find(
-      (s) => s.artistId == id && s.artworkUrl100
+      (s: any) => s.artistId == id && s.artworkUrl100
+
     )?.artworkUrl100;
 
     const albumImage = songsQuery.data.results.find(
-      (s) => s.artistId == id && s.artworkUrl100
+      (s: any) => s.artistId == id && s.artworkUrl100
+
     )?.artworkUrl100;
 
 
