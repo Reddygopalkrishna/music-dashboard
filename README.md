@@ -112,6 +112,7 @@ Password: password
 ---
 
 # 🗂️ Folder Structure
+
 music-dashboard/
 │
 ├── app/
@@ -119,14 +120,11 @@ music-dashboard/
 │   │   └── auth/
 │   │       └── [...nextauth]/
 │   │           └── route.ts
-│   │
 │   ├── auth/
 │   │   └── login/page.tsx
-│   │
 │   ├── playlists/
 │   │   ├── page.tsx
 │   │   └── [id]/page.tsx
-│   │
 │   ├── liked/page.tsx
 │   ├── search/page.tsx
 │   ├── profile/page.tsx
@@ -140,7 +138,6 @@ music-dashboard/
 │   ├── SongCard.tsx
 │   ├── ArtistCard.tsx
 │   ├── SkeletonGrid.tsx
-│   │
 │   └── playlist/
 │       ├── CreatePlaylistModal.tsx
 │       ├── RenamePlaylistModal.tsx
@@ -149,29 +146,22 @@ music-dashboard/
 ├── lib/
 │   ├── api/
 │   │   └── music.ts
-│   │
 │   ├── providers/
 │   │   ├── ReduxProvider.tsx
 │   │   ├── QueryProvider.tsx
 │   │   └── SessionProvider.tsx
-│   │
 │   ├── slices/
 │   │   ├── playerSlice.ts
 │   │   ├── playlistSlice.ts
 │   │   └── likedSlice.ts
-│   │
 │   ├── utils/
 │   │   └── getUniqueArtists.ts
-│   │
 │   └── store.ts
 │
 ├── public/
-│
 ├── styles/
 │   └── globals.css
-│
 └── package.json
-
 ---
 
 # 🔧 Setup Instructions
