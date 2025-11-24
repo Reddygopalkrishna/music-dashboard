@@ -1,13 +1,9 @@
 # 🎵 Music Streaming Dashboard  
 A complete, modern music streaming dashboard built with **Next.js 14**, **Redux Toolkit**, **NextAuth**, **TanStack Query**, and **Tailwind + shadcn/ui**.
 
-This project was created as part of a frontend assignment, fully matching the required specifications.
-
 ---
 
-# 📸 Screenshots  
-> Replace the placeholder image links with your real screenshot URLs.
-
+# 📸 UI Looks  
 ### 🏠 Home Page
  <img width="1906" height="862" alt="image" src="https://github.com/user-attachments/assets/c2632aed-3ece-4e08-9e16-b49efa682734" />
 
@@ -115,60 +111,66 @@ Password: password
 
 ---
 
-# 🗂️ Folder Structure (Important)
-
-
-
+# 🗂️ Folder Structure
 music-dashboard/
 │
 ├── app/
-│ ├── api/
-│ │ └── auth/
-│ │ └── [...nextauth]/
-│ │ └── route.ts
-│ ├── auth/
-│ │ └── login/page.tsx
-│ ├── playlists/
-│ │ ├── page.tsx
-│ │ └── [id]/page.tsx
-│ ├── liked/page.tsx
-│ ├── search/page.tsx
-│ ├── profile/page.tsx
-│ ├── layout.tsx
-│ └── page.tsx
+│   ├── api/
+│   │   └── auth/
+│   │       └── [...nextauth]/
+│   │           └── route.ts
+│   │
+│   ├── auth/
+│   │   └── login/page.tsx
+│   │
+│   ├── playlists/
+│   │   ├── page.tsx
+│   │   └── [id]/page.tsx
+│   │
+│   ├── liked/page.tsx
+│   ├── search/page.tsx
+│   ├── profile/page.tsx
+│   ├── layout.tsx
+│   └── page.tsx
 │
 ├── components/
-│ ├── Navbar.tsx
-│ ├── Player.tsx
-│ ├── BottomNav.tsx
-│ ├── SongCard.tsx
-│ ├── ArtistCard.tsx
-│ ├── SkeletonGrid.tsx
-│ ├── playlist/
-│ │ ├── CreatePlaylistModal.tsx
-│ │ ├── RenamePlaylistModal.tsx
-│ │ └── DeletePlaylistModal.tsx
+│   ├── Navbar.tsx
+│   ├── Player.tsx
+│   ├── BottomNav.tsx
+│   ├── SongCard.tsx
+│   ├── ArtistCard.tsx
+│   ├── SkeletonGrid.tsx
+│   │
+│   └── playlist/
+│       ├── CreatePlaylistModal.tsx
+│       ├── RenamePlaylistModal.tsx
+│       └── DeletePlaylistModal.tsx
 │
 ├── lib/
-│ ├── api/music.ts
-│ ├── providers/
-│ │ ├── ReduxProvider.tsx
-│ │ ├── QueryProvider.tsx
-│ │ ├── SessionProvider.tsx
-│ ├── slices/
-│ │ ├── playerSlice.ts
-│ │ ├── playlistSlice.ts
-│ │ └── likedSlice.ts
-│ ├── utils/getUniqueArtists.ts
-│ └── store.ts
+│   ├── api/
+│   │   └── music.ts
+│   │
+│   ├── providers/
+│   │   ├── ReduxProvider.tsx
+│   │   ├── QueryProvider.tsx
+│   │   └── SessionProvider.tsx
+│   │
+│   ├── slices/
+│   │   ├── playerSlice.ts
+│   │   ├── playlistSlice.ts
+│   │   └── likedSlice.ts
+│   │
+│   ├── utils/
+│   │   └── getUniqueArtists.ts
+│   │
+│   └── store.ts
 │
 ├── public/
 │
 ├── styles/
-│ └── globals.css
+│   └── globals.css
 │
 └── package.json
-
 
 ---
 
@@ -227,7 +229,7 @@ NEXTAUTH_URL=https://your-vercel-url.vercel.app
 
 Deploy!
 
-📝 Assignment Requirements — Completed ✔
+Key Features Implementation
 Requirement	Status
 Trending songs	✅
 Popular artists	✅
