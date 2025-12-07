@@ -1,6 +1,6 @@
 # 🎵 Music Streaming Dashboard  
 A complete, modern music streaming dashboard built with **Next.js 14**, **Redux Toolkit**, **NextAuth**, **TanStack Query**, and **Tailwind + shadcn/ui**.
-<!-- 
+
 # 📸 UI Looks  
 ### 🏠 Home Page
 <img width="1906" height="862" alt="image" src="https://github.com/user-attachments/assets/c2632aed-3ece-4e08-9e16-b49efa682734" />
@@ -14,7 +14,7 @@ A complete, modern music streaming dashboard built with **Next.js 14**, **Redux 
 ### 🔐 Login Page
 <img width="682" height="375" alt="image" src="https://github.com/user-attachments/assets/138a72d3-6520-43e1-9447-fcabd8fb21a0" />
 
--->
+
 ---
 # 🚀 Features Implemented
 
